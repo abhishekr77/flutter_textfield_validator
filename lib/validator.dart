@@ -125,18 +125,6 @@ class Validator {
     }
   }
 
-  static String? phone(String value) {
-    final nob = int.tryParse(value);
-    if (nob != null) {
-      if (value.length == 10) {
-        return null;
-      } else {
-        return 'Mobile no. must be of 10 digit.';
-      }
-    } else {
-      return 'Not a Valid mobile no.';
-    }
-  }
 
   static String? pan(String value) {
     final nob = int.tryParse(value);
@@ -151,16 +139,6 @@ class Validator {
     }
   }
 
-  static String? email(String value) {
-    final bool isValid = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(value.trim());
-    if (isValid) {
-      return null;
-    } else {
-      return 'Please enter a valid email';
-    }
-  }
 
   static String? youtubeLink(String value, [String? message]) {
     final String? url = empty(value);
@@ -198,9 +176,9 @@ class Validator {
     final String? mail = empty(value);
     if (mail == null) {
       if (value.contains("@")) {
-        return email(value);
+        return validateEmail(value);
       } else {
-        return phone(value);
+        return validatePhoneNumber(value);
       }
     } else {
       return mail;
